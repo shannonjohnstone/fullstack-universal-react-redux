@@ -10,4 +10,4 @@ Run either **npm** or **yarn** to get this projects dependencies installed with 
 `npm install` or `yarn`
 
 ## Styling
-Currently this application is using Bootstrap for all styling, this was for the advantage of speed during development and we plan on coming back to this and re styling the application once it is all working.
+Styling is basic at present, starting from scratch with scss. All scss files are housed in `src/styles/` directory
