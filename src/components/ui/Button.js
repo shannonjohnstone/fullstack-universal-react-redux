@@ -2,8 +2,6 @@ import React from 'react'
 import { string } from 'prop-types'
 import classNames from 'classnames'
 
-require('./Button.scss')
-
 function Button({ buttonType, value }) {
   const btnClass = classNames({
     'btn--default': buttonType === 'default',
