@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { arrayOf, object, func } from 'prop-types'
 import { getBooks } from '../../actions/booksActions'
 import BookItem from './BookItem'
+import BooksForm from './BooksForm'
 
 class BooksList extends Component {
   static propTypes = {
@@ -18,6 +19,7 @@ class BooksList extends Component {
       <div className="row">
         <section className="center-col col-12-sm col-6">
           <h1>Books List</h1>
+          <BooksForm />
           <ul className="list--clean">
             {books}
           </ul>
