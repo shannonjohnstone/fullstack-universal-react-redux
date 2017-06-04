@@ -1,29 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { arrayOf, object } from 'prop-types'
+import { arrayOf, object, func } from 'prop-types'
 import { getBooks } from '../../actions/booksActions'
-import Button from '../ui/Button'
+import BookItem from './BookItem'
 
 class BooksList extends Component {
   static propTypes = {
-    books: arrayOf(object).isRequired
+    books: arrayOf(object).isRequired,
+    getBooks: func.isRequired
   }
   componentDidMount() {
     this.props.getBooks()
   }
   render() {
-    const books = this.props.books.map(book => (
-      <li key={book.id}>
-        <div>
-          <h2>{book.title}</h2>
-          <p>{book.description}</p>
-          <p>${book.price.toFixed(2)}</p>
-          <Button buttonType="success" value="Add to cart" />
-          <Button buttonType="primary" value="Add to cart" />
-          <Button buttonType="danger" value="Add to cart" />
-        </div>
-      </li>
-    ))
+    const books = this.props.books.map(book => <BookItem key={book.id} book={book} />)
     return (
       <div className="row">
         <section className="center-col col-12-sm col-6">
