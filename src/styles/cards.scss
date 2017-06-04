@@ -1,0 +1,10 @@
+.card {
+    padding: 20px;
+    background: lighten($lightgrey, 30);
+    border-radius: 2px;
+    margin-bottom: 20px;
+
+    @include headings() {
+        margin-top: 0;
+    };
+}
