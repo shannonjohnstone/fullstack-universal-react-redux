@@ -8,7 +8,15 @@ class BooksList extends Component {
     books: arrayOf(object).isRequired
   }
   render() {
-    const books = this.props.books.map(book => <li key={book.id}>{book.title}</li>)
+    const books = this.props.books.map(book => (
+      <li key={book.id}>
+        <div>
+          <h2>{book.title}</h2>
+          <p>{book.description}</p>
+          <p>${book.price.toFixed(2)}</p>
+        </div>
+      </li>
+    ))
     return (
       <section>
         <h1>Books List</h1>
