@@ -39,11 +39,11 @@ store.dispatch(postBooks([{
 }]
 ))
 
-store.dispatch(deleteBook({ id: 2 }))
+// store.dispatch(deleteBook({ id: 2 }))
 
-store.dispatch(updateBook({
-  id: 3,
-  title: 'New Book Title'
-}))
+// store.dispatch(updateBook({
+//   id: 3,
+//   title: 'New Book Title'
+// }))
 
-store.dispatch(addToCart([{ id: 1 }]))
+// store.dispatch(addToCart([{ id: 1 }]))
