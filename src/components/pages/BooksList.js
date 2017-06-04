@@ -26,6 +26,7 @@ class BooksList extends Component {
         <ul>
           {books}
         </ul>
+        <button className="btn btn-success">this is a button</button>
       </section>
     )
   }
