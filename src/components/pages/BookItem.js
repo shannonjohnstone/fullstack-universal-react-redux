@@ -1,11 +1,11 @@
 import React from 'react'
-import { string, number } from 'prop-types'
+import { shape, string, number } from 'prop-types'
 import Button from '../ui/Button'
 
-function BookItem({ title, description, price }) {
+function BookItem({ book: { title, description, price } }) {
   return (
-    <li>
-      <div>
+    <li className="list-item">
+      <div className="card">
         <h2>{title}</h2>
         <p>{description}</p>
         <p>${price.toFixed(2)}</p>
@@ -18,9 +18,11 @@ function BookItem({ title, description, price }) {
 }
 
 BookItem.propTypes = {
-  title: string.isRequired,
-  description: string.isRequired,
-  price: number.isRequired
+  book: shape({
+    title: string,
+    description: string,
+    price: number
+  }).isRequired
 }
 
 export default BookItem

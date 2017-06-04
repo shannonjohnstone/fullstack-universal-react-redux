@@ -18,7 +18,7 @@ class BooksList extends Component {
       <div className="row">
         <section className="center-col col-12-sm col-6">
           <h1>Books List</h1>
-          <ul>
+          <ul className="list--clean">
             {books}
           </ul>
         </section>
