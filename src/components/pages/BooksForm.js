@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
-import { FormInput } from '../../modules/FormUtil'
+import FormInput from '../ui/FormUtil'
 
 class BooksForm extends Component {
   render() {
     return (
       <div>
-        <FormInput
-          className="form-input"
-          name="title"
-          location="customer.title"
-          type="text"
-        />
+        {/* // TODO: start of form */}
       </div>
     )
   }
