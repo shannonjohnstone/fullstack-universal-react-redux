@@ -13,7 +13,7 @@ const initState = {
   {
     id: 2,
     title: 'Book Title 2',
-    description: 'Best book ever.',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, suscipit, necessitatibus. Blanditiis atque iste tenetur rem voluptatum quia pariatur rerum, dolorum, deleniti ab, reiciendis sit veniam eaque optio earum odit..',
     price: 88.99
   },
   {

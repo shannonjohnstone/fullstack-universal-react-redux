@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { arrayOf, object } from 'prop-types'
 import { getBooks } from '../../actions/booksActions'
+import Button from '../ui/Button'
 
 class BooksList extends Component {
   static propTypes = {
@@ -17,17 +18,21 @@ class BooksList extends Component {
           <h2>{book.title}</h2>
           <p>{book.description}</p>
           <p>${book.price.toFixed(2)}</p>
+          <Button buttonType="success" value="Add to cart" />
+          <Button buttonType="primary" value="Add to cart" />
+          <Button buttonType="danger" value="Add to cart" />
         </div>
       </li>
     ))
     return (
-      <section>
-        <h1>Books List</h1>
-        <ul>
-          {books}
-        </ul>
-        <button className="btn btn-success">this is a button</button>
-      </section>
+      <div className="row">
+        <section className="center-col col-12-sm col-6">
+          <h1>Books List</h1>
+          <ul>
+            {books}
+          </ul>
+        </section>
+      </div>
     )
   }
 }

@@ -10,6 +10,8 @@ import { addToCart } from './actions/cartActions'
 import { postBooks, deleteBook, updateBook } from './actions/booksActions'
 import BooksList from './components/pages/BooksList'
 
+require('./styles/main.scss') // include css
+
 const middleware = applyMiddleware(logger)
 const store = createStore(reducers, middleware)
 
