@@ -19,25 +19,8 @@ render(
   </Provider>, document.getElementById('app')
 )
 
-store.dispatch(postBooks([{
-  id: 1,
-  title: 'Book Title',
-  description: 'Best book ever.',
-  price: 20.00
-},
-{
-  id: 2,
-  title: 'Book Title 2',
-  description: 'Best book ever.',
-  price: 88.99
-},
-{
-  id: 3,
-  title: 'Book Title 2',
-  description: 'Best book ever.',
-  price: 88.99
-}]
-))
+// store.dispatch(postBooks(
+// ))
 
 // store.dispatch(deleteBook({ id: 2 }))
 

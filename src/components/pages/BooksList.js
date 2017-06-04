@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-import { arrayOf, object } from 'prop-types'
-
 import { connect } from 'react-redux'
+import { arrayOf, object } from 'prop-types'
+import { getBooks } from '../../actions/booksActions'
 
 class BooksList extends Component {
   static propTypes = {
     books: arrayOf(object).isRequired
+  }
+  componentDidMount() {
+    this.props.getBooks()
   }
   render() {
     const books = this.props.books.map(book => (
@@ -34,4 +37,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(BooksList)
+export default connect(mapStateToProps, { getBooks })(BooksList)
