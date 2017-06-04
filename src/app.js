@@ -3,6 +3,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { applyMiddleware, createStore } from 'redux'
+import { Provider } from 'react-redux'
 import logger from 'redux-logger'
 import reducers from './reducers'
 import { addToCart } from './actions/cartActions'
@@ -13,7 +14,9 @@ const middleware = applyMiddleware(logger)
 const store = createStore(reducers, middleware)
 
 render(
-  <BooksList />, document.getElementById('app')
+  <Provider store={store}>
+    <BooksList />
+  </Provider>, document.getElementById('app')
 )
 
 store.dispatch(postBooks([{

@@ -1,9 +1,29 @@
 import React, { Component } from 'react'
+import { arrayOf, object } from 'prop-types'
+
+import { connect } from 'react-redux'
 
 class BooksList extends Component {
+  static propTypes = {
+    books: arrayOf(object).isRequired
+  }
   render() {
-    return <div><h1>Hello React</h1></div>
+    const books = this.props.books.map(book => <li key={book.id}>{book.title}</li>)
+    return (
+      <section>
+        <h1>Books List</h1>
+        <ul>
+          {books}
+        </ul>
+      </section>
+    )
   }
 }
 
-export default BooksList
+function mapStateToProps(state) {
+  return {
+    books: state.books.books
+  }
+}
+
+export default connect(mapStateToProps)(BooksList)
