@@ -1,3 +1,10 @@
+
+@mixin disableBackground($color) {
+    &:disabled {
+        background: lighten($primary, 25);
+    }
+}
+
 .btn {
     padding: 10px 20px;
     border: none;
@@ -15,12 +22,33 @@
 
 .btn--success {
     background: $success;
+
+    @include disableBackground($success);
 }
 
 .btn--primary {
     background: $primary;
+
+    @include disableBackground($primary);
 }
 
 .btn--danger {
     background: $danger;
+
+    @include disableBackground($danger);
+}
+
+.incrementDecrement__button {
+    box-shadow: none;
+    border: none;
+    margin: 0 !important;
+    padding: 10px 0 10px 0;
+}
+
+.incrementDecrement__button--left {
+    border-radius: 2px 0 0 2px;
+}
+
+.incrementDecrement__button--right {
+    border-radius: 0 2px 2px 0;
 }
