@@ -10,24 +10,28 @@ class BookItem extends Component {
     super(props)
     this.addItemToCart = this.addItemToCart.bind(this)
   }
-  addItemToCart(e, book) {
+  addItemToCart(e, book, isInCart) {
     e.preventDefault()
     const { addToCartAction: _addToCartAction } = this.props
-    _addToCartAction(book)
+    if (!isInCart) _addToCartAction({ ...book, quantity: 1 })
   }
   render() {
     const { book, book: { title, description, price } } = this.props
+    const isInCart = this.props.cart.some(cartItem => cartItem.id === book.id)
     return (
       <li className="list-item">
         <div className="card">
           <h2>{title}</h2>
           <p>{description}</p>
           <p>${price.toFixed(2)}</p>
-          <Button
-            buttonType="primary"
-            value="Add to cart"
-            onClick={e => this.addItemToCart(e, book)}
-          />
+          {
+            <Button
+              buttonType="primary"
+              disabled={isInCart}
+              value="Add to cart"
+              onClick={e => this.addItemToCart(e, book, isInCart)}
+            />
+          }
         </div>
       </li>
     )

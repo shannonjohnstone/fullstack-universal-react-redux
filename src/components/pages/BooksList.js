@@ -19,22 +19,20 @@ class BooksList extends Component {
     const books = [...this.props.books].reverse().map(book => <BookItem key={book.id} book={book} />)
     return (
       <div className="row">
-        <section className="row">
-          <div className="col-12">
-            <Cart />
+        <div className="col-12">
+          <Cart />
+        </div>
+        <h1>Books List</h1>
+        <div className="row">
+          <div className="col-6">
+            <BooksForm />
           </div>
-          <h1>Books List</h1>
-          <div className="row">
-            <div className="col-6">
-              <BooksForm />
-            </div>
-            <div className="col-6">
-              <ul className="list--clean">
-                {books}
-              </ul>
-            </div>
+          <div className="col-6">
+            <ul className="list--clean">
+              {books}
+            </ul>
           </div>
-        </section>
+        </div>
       </div>
     )
   }
