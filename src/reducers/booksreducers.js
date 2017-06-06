@@ -18,7 +18,7 @@ const initState = {
   },
   {
     id: 3,
-    title: 'Book Title 2',
+    title: 'Book Title 2 has a really really really looooooong name......',
     description: 'Best book ever.',
     price: 88.99
   }]
