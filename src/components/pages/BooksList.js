@@ -1,28 +1,33 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { arrayOf, object, func } from 'prop-types'
+import { arrayOf, object } from 'prop-types'
 import { getBooks } from '../../actions/booksActions'
 import BookItem from './BookItem'
 import BooksForm from './BooksForm'
 
 class BooksList extends Component {
   static propTypes = {
-    books: arrayOf(object).isRequired,
-    getBooks: func.isRequired
+    books: arrayOf(object).isRequired
   }
   componentDidMount() {
-    this.props.getBooks()
+    // this.props.getBooks()
   }
   render() {
-    const books = this.props.books.map(book => <BookItem key={book.id} book={book} />)
+    const books = this.props.books.reverse().map(book => <BookItem key={book.id} book={book} />)
     return (
       <div className="row">
-        <section className="center-col col-12-sm col-6">
+        <section className="row">
           <h1>Books List</h1>
-          <BooksForm />
-          <ul className="list--clean">
-            {books}
-          </ul>
+          <div className="row">
+            <div className="col-6">
+              <BooksForm />
+            </div>
+            <div className="col-6">
+              <ul className="list--clean">
+                {books}
+              </ul>
+            </div>
+          </div>
         </section>
       </div>
     )
