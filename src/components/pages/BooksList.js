@@ -4,6 +4,7 @@ import { arrayOf, object } from 'prop-types'
 import { getBooks } from '../../actions/booksActions'
 import BookItem from './BookItem'
 import BooksForm from './BooksForm'
+import Cart from './cart'
 
 class BooksList extends Component {
   static propTypes = {
@@ -13,10 +14,15 @@ class BooksList extends Component {
     // this.props.getBooks()
   }
   render() {
-    const books = this.props.books.reverse().map(book => <BookItem key={book.id} book={book} />)
+    // spreading array into a new array so the reverse does not effect the orginal books array
+    // reverse() will mutate the orginal/reference array and does not create a new version
+    const books = [...this.props.books].reverse().map(book => <BookItem key={book.id} book={book} />)
     return (
       <div className="row">
         <section className="row">
+          <div className="col-12">
+            <Cart />
+          </div>
           <h1>Books List</h1>
           <div className="row">
             <div className="col-6">
