@@ -1,7 +1,7 @@
-export default function (state = [], action) {
+export default function (state = { cart: [] }, action) {
   switch (action.type) {
     case 'ADD_TO_CART':
-      return { cart: [...state, action.payload] }
+      return { cart: [...state.cart, action.payload] }
     default:
       return state
   }
