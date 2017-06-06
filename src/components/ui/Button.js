@@ -1,20 +1,21 @@
 import React from 'react'
-import { string } from 'prop-types'
+import { string, func } from 'prop-types'
 import classNames from 'classnames'
 
-function Button({ buttonType, value }) {
+function Button({ buttonType, value, onClick }) {
   const btnClass = classNames({
     'btn--default': buttonType === 'default',
     'btn--primary': buttonType === 'primary',
     'btn--success': buttonType === 'success',
     'btn--danger': buttonType === 'danger',
   })
-  return <button className={`btn ${btnClass}`}>{value}</button>
+  return <button className={`btn ${btnClass}`} onClick={onClick} >{value}</button>
 }
 
 Button.propTypes = {
   buttonType: string,
-  value: string.isRequired
+  value: string.isRequired,
+  onClick: func.isRequired
 }
 
 Button.defaultProps = {
