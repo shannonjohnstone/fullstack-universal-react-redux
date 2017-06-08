@@ -27,7 +27,7 @@ const initState = {
 export default function (state = initState, action) {
   const { type, payload } = action
   switch (type) {
-    case 'GET_BOOKS': {
+    case 'FETCH_BOOKS': {
       return { ...state, books: [...state.books] }
     }
     case 'POST_BOOK': {

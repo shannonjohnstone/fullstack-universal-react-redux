@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "NODE_ENV=production node ./bin/www",
-    "start:dev": "NODE_ENV=development DEBUG=fullstack-universal-react-redux-bolierplate:server nodemon ./bin/www"
+    "start:dev": "NODE_ENV=development DEBUG=fullstack-universal-react-redux-bolierplate:server nodemon ./bin/www",
+    "webpack:dev": "NODE_ENV=development webpack --config webpack.config.js"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
@@ -22,6 +23,7 @@
     "webpack": "^2.6.1"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
     "babel-polyfill": "^6.23.0",
@@ -48,6 +50,7 @@
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "redux": "^3.6.0",
+    "redux-saga": "^0.15.3",
     "serve-favicon": "~2.4.2"
   }
 }

@@ -5,6 +5,7 @@
 const mongoose = require('mongoose')
 const path = require('path')
 const env = require('node-env-file')
+// const endpointConfig = require('./config/services/api')
 
 switch (process.env.NODE_ENV) {
   case 'development': {
@@ -17,6 +18,8 @@ switch (process.env.NODE_ENV) {
     console.log('PRODUCTION MODE') // eslint-disable-line
   }
 }
+
+// endpointConfig(process.env.NODE_ENV, process.env.API_URL)
 
 mongoose.connect(process.env.MONGOOSE_URL)
 mongoose.Promise = global.Promise // Tell Mongoose to use ES6 promises

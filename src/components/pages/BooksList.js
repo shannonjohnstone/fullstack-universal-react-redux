@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { arrayOf, object } from 'prop-types'
-import { getBooks } from '../../actions/booksActions'
+import { fetchBooksAction } from '../../actions/booksActions'
 import BookItem from './BookItem'
 import BooksForm from './BooksForm'
 import Cart from './Cart'
@@ -12,9 +13,13 @@ class BooksList extends Component {
     books: arrayOf(object).isRequired
   }
   componentDidMount() {
-    // this.props.getBooks()
+
+    console.log(process.env, 'mount1');
+    console.log(this.props, 'mount2');
+    this.props.fetchBooksAction()
   }
   render() {
+    console.log(this.props, 'render');
     // spreading array into a new array so the reverse does not effect the orginal books array
     // reverse() will mutate the orginal/reference array and does not create a new version
     const books = [...this.props.books].reverse().map(book => <BookItem key={book.id} book={book} />)
@@ -42,4 +47,8 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { getBooks })(BooksList)
+function mapDispatchToProp(dispatch) {
+  return bindActionCreators({ fetchBooksAction }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProp)(BooksList)

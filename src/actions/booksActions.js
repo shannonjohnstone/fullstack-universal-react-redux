@@ -1,5 +1,5 @@
-export function getBooks() {
-  return { type: 'GET_BOOKS' }
+export function fetchBooksAction() {
+  return { type: 'FETCH_BOOKS' }
 }
 
 export function postBooks(book) {

@@ -5,8 +5,11 @@ const booksControllers = require('../controllers/books')
 const { catchErrors } = require('../handlers/errorHandlers')
 
 /* GET users listing. */
-router.post('/books', catchErrors(booksControllers.createBooks))
-router.delete('/books/:id', catchErrors(booksControllers.deleteBooks))
-router.put('/books/:id', catchErrors(booksControllers.updateBook))
+router.get('/', catchErrors(booksControllers.fetchBooks))
+router.post('/', catchErrors(booksControllers.createBooks))
+router.delete('/:id', catchErrors(booksControllers.deleteBooks))
+router.put('/:id', catchErrors(booksControllers.updateBook))
+
+router.use('/services/v1/books', router)
 
 module.exports = router

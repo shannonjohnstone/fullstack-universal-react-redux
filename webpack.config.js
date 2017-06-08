@@ -1,6 +1,19 @@
 const path = require('path')
 const webpack = require('webpack')
 
+function createApiUrl(NODE_ENV) {
+  switch (process.env.NODE) {
+    case 'production':
+      return 'api.production'
+    case 'test':
+      return 'api.test'
+    case 'development':
+      return 'http://localhost:3000/'
+    default:
+      return 'http://localhost:3000/'
+  }
+}
+
 module.exports = {
   entry: ['babel-polyfill', './src/app.js'],
   output: {
@@ -31,6 +44,15 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        API_URL: JSON.stringify(createApiUrl(process.env.NODE_ENV))
+
+      }
+    })
+  ],
   devServer: {
     historyApiFallback: true
   }
