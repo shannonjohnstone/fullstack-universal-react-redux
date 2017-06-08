@@ -4,7 +4,8 @@ import { arrayOf, object } from 'prop-types'
 import { getBooks } from '../../actions/booksActions'
 import BookItem from './BookItem'
 import BooksForm from './BooksForm'
-import Cart from './cart'
+import Cart from './Cart'
+import Navigation from '../Navigation'
 
 class BooksList extends Component {
   static propTypes = {
@@ -19,9 +20,6 @@ class BooksList extends Component {
     const books = [...this.props.books].reverse().map(book => <BookItem key={book.id} book={book} />)
     return (
       <div className="row">
-        <div className="col-12">
-          <Cart />
-        </div>
         <h1>Books List</h1>
         <div className="row">
           <div className="col-6">

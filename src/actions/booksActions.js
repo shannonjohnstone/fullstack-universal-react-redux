@@ -9,7 +9,7 @@ export function postBooks(book) {
   }
 }
 
-export function deleteBook(id) {
+export function deleteBooks(id) {
   return {
     type: 'DELETE_BOOK',
     payload: id

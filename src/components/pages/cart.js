@@ -27,40 +27,54 @@ class Cart extends Component {
   }
   renderCart() {
     const cartItemList = this.props.cart.map(cartArr => (
-      <ul className="list--clean row" key={cartArr.id}>
-        <li className="col-12-sm col-4">
-          <p className="truncate"><strong>{cartArr.title}</strong></p>
-        </li>
-        <li className="col-12-sm col-2">
-          <p><strong>AU$</strong> {cartArr.price}</p>
-        </li>
-        <li className="col-12-sm col-2">
-          <p><strong>QTY:</strong> {cartArr.quantity}</p>
-        </li>
-        <li className="col-12-sm col-2">
-          <div className="row incrementDecrement">
-            <button
-              onClick={e => this.incrementDecrementQty(e, cartArr.id, 'increment')}
-              className="col-6 incrementDecrement__button incrementDecrement__button--left"
-            >+
-            </button>
-            <button
-              onClick={e => this.incrementDecrementQty(e, cartArr.id, 'decrement')}
-              className="col-6 incrementDecrement__button incrementDecrement__button--right"
-            >-
-            </button>
-          </div>
-        </li>
-        <li className="col-12-sm col-2">
-          <Button
-            buttonType="danger"
-            value="Delete"
-            onClick={e => this.removeItemFromCart(e, cartArr.id)}
-          />
-        </li>
-      </ul>
+      <div className="row">
+        <ul className="list--clean col-12" key={cartArr.id}>
+          <li className="col-12-sm col-4">
+            <p className="truncate"><strong>{cartArr.title}</strong></p>
+          </li>
+          <li className="col-12-sm col-2">
+            <p><strong>AU$</strong> {cartArr.price}</p>
+          </li>
+          <li className="col-12-sm col-2">
+            <p><strong>QTY:</strong> {cartArr.quantity}</p>
+          </li>
+          <li className="col-12-sm col-2">
+            <div className="row incrementDecrement">
+              <button
+                onClick={e => this.incrementDecrementQty(e, cartArr.id, 'increment')}
+                className="col-6 incrementDecrement__button incrementDecrement__button--left"
+                >+
+              </button>
+              <button
+                onClick={e => this.incrementDecrementQty(e, cartArr.id, 'decrement')}
+                className="col-6 incrementDecrement__button incrementDecrement__button--right"
+                >-
+              </button>
+            </div>
+          </li>
+          <li className="col-12-sm col-2">
+            <Button
+              buttonType="danger"
+              value="Delete"
+              onClick={e => this.removeItemFromCart(e, cartArr.id)}
+            />
+          </li>
+        </ul>
+      </div>
     ))
-    return <div className="card">{cartItemList}</div>
+    return (
+      <div className="col-12 card">
+        {cartItemList}
+        <hr/>
+        <p>Total qty: {this.props.totalQty}</p>
+        <p>Total Amount: ${this.props.totalAmount}</p>
+        <Button
+          buttonType="success"
+          value="Checkout"
+          // onClick={e => this.removeItemFromCart(e, cartArr.id)}
+        />
+      </div>
+    )
   }
   render() {
     if (this.props.cart[0]) return this.renderCart()
@@ -70,7 +84,9 @@ class Cart extends Component {
 
 function mapStateToProps(state) {
   return {
-    cart: state.cart.cart
+    cart: state.cart.cart,
+    totalAmount: state.cart.totalAmount,
+    totalQty: state.cart.totalQty
   }
 }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { func } from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { postBooks } from '../../actions/booksActions'
+import { postBooks, deleteBooks } from '../../actions/booksActions'
 // import { findDOMNode} from 'react'
 
 class BooksForm extends Component {
@@ -27,23 +27,25 @@ class BooksForm extends Component {
   }
   render() {
     return (
-      <div className="card">
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="title">Title</label>
-          <input type="text" name="title" placeholder="Enter title" ref="title" className="form-input" />
-          <label htmlFor="description">Description</label>
-          <input type="text" name="description" placeholder="Enter description" ref="description" className="form-input" />
-          <label htmlFor="price">Price</label>
-          <input type="text" name="price" placeholder="Enter price" ref="price" className="form-input" />
-          <input type="submit" value="Submit" />
-        </form>
+      <div>
+        <div className="card">
+          <form onSubmit={this.handleSubmit}>
+            <label htmlFor="title">Title</label>
+            <input type="text" name="title" placeholder="Enter title" ref="title" className="form-input" />
+            <label htmlFor="description">Description</label>
+            <input type="text" name="description" placeholder="Enter description" ref="description" className="form-input" />
+            <label htmlFor="price">Price</label>
+            <input type="text" name="price" placeholder="Enter price" ref="price" className="form-input" />
+            <input type="submit" value="Submit" />
+          </form>
+        </div>
       </div>
     )
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ postBooks }, dispatch)
+  return bindActionCreators({ postBooks, deleteBooks }, dispatch)
 }
 
 function mapStateToProps(state) {
