@@ -1,0 +1,124 @@
+$breakpoint-small: 33.75em; // 540px
+$breakpoint-med: 45em; // 720px
+$breakpoint-large: 60em; // 960px
+
+
+.navigation { background-color: #000; }
+.navigation__list-item { color: #fff; position: relative; }
+.navigation__list-item a { color: #fff; }
+.badge {
+    position: absolute;
+    top: -1px;
+    right: -40px;
+    color: #fff;
+    font-size: 13px;
+    background: red;
+    width: 21px;
+    height: 21px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    display: block;
+    padding: -6px;
+    text-align: center;
+}
+
+
+.show-menu {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.toggle {
+    position: relative;
+    // left: 38%;
+    top: 7%;
+    padding: 0;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.toggle__span, .toggle__span:before, .toggle__span:after {
+    cursor: pointer;
+    border-radius: 1px;
+    height: 3px;
+    width: 25px;
+    background: #fff;
+    position: absolute;
+    display: block;
+    content: ''
+}
+
+.toggle__span:before {
+    top: -7px;
+}
+
+.toggle__span:after {
+    bottom: -7px;
+}
+
+.toggle__span:before, .toggle__span:after {
+    transition: all 250ms ease-in-out;
+}
+
+input[type=checkbox]:checked ~ label .toggle .toggle__span {
+    background-color: transparent;
+
+    &:before {
+        top: 0;
+        transform: rotate(45deg)
+    }
+    &:after {
+        top: 0;
+        transform: rotate(-45deg)
+    }
+}
+
+input[type=checkbox] { display: none; }
+
+/* hide menu */
+input[type=checkbox] ~ .navigation__list {
+    display: block;
+    height: 0;
+    background-color: transparent;
+    visibility: hidden;
+    opacity: 0;
+}
+
+/* show menu when checkbox is checked */
+input[type=checkbox]:checked ~ .navigation__list {
+    display: block;
+    height: auto;
+    // background-color: white;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.5s linear;
+}
+
+/* show flexbox verison on larger screens */
+@media screen and (min-width: $breakpoint-small) {
+    .navigation { padding: 10px 0 }
+
+    input[type=checkbox] ~ .navigation__list {
+        display: flex;
+        height: auto;
+        background-color: transparent;
+        visibility: visible;
+        opacity: 1;
+        transition: visibility 0s 0.2s, opacity 0.2s ease-out;
+    }
+
+    .show-menu { display: none; }
+
+    .navigation__list {
+        display: flex;
+        width: 100%;
+    }
+
+    .navigation__list-item .navigation__list-item { padding-left: 20px; }
+    .navigation__list-item--left {
+        flex-grow: 1;
+        .navigation__list-item { padding-right: 10px; }
+    }
+}
