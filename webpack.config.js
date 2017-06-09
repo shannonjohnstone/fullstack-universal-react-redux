@@ -2,7 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 
 function createApiUrl(NODE_ENV) {
-  switch (process.env.NODE) {
+  switch (NODE_ENV) {
     case 'production':
       return 'api.production'
     case 'test':

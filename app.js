@@ -2,51 +2,27 @@
 /* eslint func-names: 0 */
 
 const express = require('express')
+const logger = require('morgan')
 const path = require('path')
 const favicon = require('serve-favicon')
-const logger = require('morgan')
-const cookieParser = require('cookie-parser')
-const bodyParser = require('body-parser')
 const errorHandlers = require('./handlers/errorHandlers')
-
-// const index = require('./routes/index')
-// const users = require('./routes/users')
+const httpProxy = require('http-proxy')
 
 const app = express()
+app.use(logger('dev'))
 
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'))
-// app.set('view engine', 'jade')
+// PROXY --------------------------------------------------------------------------------------------
+const apiProxy = httpProxy.createProxyServer()
+app.all('/api/*', (req, res) => {
+  apiProxy.web(req, res, { target: 'http://localhost:3001/' })
+})
+// END PROXY ----------------------------------------------------------------------------------------
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
-app.use(logger('dev'))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-// APIS
-console.log('MONGOOSE APIS')
-
-// const mongoose = require('mongoose')
-
-// mongoose.connect(process.env.MONGOOSE_URL)
-// mongoose.Promise = global.Promise // Tell Mongoose to use ES6 promises
-//
-// mongoose.connection.on('error', (err) => {
-//   console.error(err, 'There was a error connecting to the database') // eslint-disable-line
-//   return false
-// })
-// mongoose.connection.on('open', () => { console.log('Connection to mongoose success') })
-
-app.use(require('./routes/books'))
-
-// END APIS
-
-// app.use('/', index)
-// app.use('/users', users)
 app.get('*', function (req, res) {
   res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
 })
@@ -83,5 +59,10 @@ app.use(errorHandlers.productionErrors)
 //   res.status(err.status || 500)
 //   res.render('error')
 // })
+
+app.listen(3000, (err) => {
+  if (err) console.log(err, 'client app err') // eslint-disable-line
+  console.log('Client app is listening on http://localhost:3000') // eslint-disable-line
+})
 
 module.exports = app

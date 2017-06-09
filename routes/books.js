@@ -10,6 +10,6 @@ router.post('/', catchErrors(booksControllers.createBooks))
 router.delete('/:id', catchErrors(booksControllers.deleteBooks))
 router.put('/:id', catchErrors(booksControllers.updateBook))
 
-router.use('/services/v1/books', router)
+router.use('/api/services/v1/books', router)
 
 module.exports = router

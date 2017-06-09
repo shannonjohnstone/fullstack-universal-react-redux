@@ -7,7 +7,7 @@ const path = require('path')
 const env = require('node-env-file')
 // const endpointConfig = require('./config/services/api')
 
-switch (process.env.NODE_ENV) {
+switch (process.env.NODE_ENV = 'development') {
   case 'development': {
     console.log('DEVELOPMENT MODE') // eslint-disable-line
     env(path.resolve(__dirname, '.env.dev'))
@@ -33,11 +33,6 @@ mongoose.connection.on('open', () => { console.log('Connection to mongoose succe
 
 require('./models/books')
 
-const app = require('./app')
-
-// app.set('port', process.env.PORT || 3000)
-// const server = app.listen(app.get('port'), () => {
-//   console.log(`Express running → PORT ${server.address().port}`)
-// })
+const app = require('./apiServer')
 
 module.exports = app
