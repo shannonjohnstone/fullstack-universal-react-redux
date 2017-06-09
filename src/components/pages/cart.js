@@ -28,7 +28,6 @@ class Cart extends Component {
   renderCart() {
     const cartItemList = this.props.cart.map(cartArr => (
       <div className="row">
-        {JSON.stringify(cartArr)}
         <ul className="list--clean col-12" key={cartArr._id}>
           <li className="col-12-sm col-4">
             <p className="truncate"><strong>{cartArr.title}</strong></p>
