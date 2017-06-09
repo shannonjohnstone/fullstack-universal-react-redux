@@ -12,7 +12,6 @@ app.get('/test', (req, res) => {
 })
 
 app.get('*', (req, res) => {
-  console.log('in server...') // eslint-disable-line
   res.sendFile(indexPath)
 })
 

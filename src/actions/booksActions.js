@@ -7,7 +7,6 @@ export function fetchBooksAction() {
 }
 
 export function fetchBooksSuccessAction(books) {
-  console.log('fetchBooksSuccessAction...');
   return {
     type: 'FETCH_BOOKS_SUCCESS',
     isSet: true,
