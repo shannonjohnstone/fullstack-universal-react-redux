@@ -1,3 +1,12 @@
+function findIndexOfItemFromId(array, _id) {
+  return array.findIndex(item => item._id === _id)
+}
+
+function calculateQty(cart, type, itemIndex) {
+  if (type === 'increment') return cart[itemIndex].quantity + 1
+  return cart[itemIndex].quantity - 1 < 1 ? 1 : cart[itemIndex].quantity - 1
+}
+
 export function addToCartAction(book) {
   return {
     type: 'ADD_TO_CART',
@@ -5,11 +14,16 @@ export function addToCartAction(book) {
   }
 }
 
-export function incrementDecrementQtyAction(id, type) {
-  const actionType = type === 'increment' ? 'INCREMENT_QTY' : 'DECREMENT_QTY'
+export function incrementDecrementQtyAction(_id, type, cart) {
+  const actionType = 'INCREMENT_DECREMENT_QTY'
+  const itemIndex = findIndexOfItemFromId(cart, _id)
+
+  const updatedItem = { ...cart[itemIndex], quantity: calculateQty(cart, type, itemIndex) }
+  const updatedCart = [...cart.slice(0, itemIndex), updatedItem, ...cart.slice(itemIndex + 1)]
+
   return {
     type: actionType,
-    payload: id
+    payload: updatedCart
   }
 }
 

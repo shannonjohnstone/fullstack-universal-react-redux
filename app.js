@@ -60,7 +60,7 @@ app.use(errorHandlers.productionErrors)
 //   res.render('error')
 // })
 
-app.listen(3000, (err) => {
+app.listen(process.env.CLIENT_PORT, (err) => {
   if (err) console.log(err, 'client app err') // eslint-disable-line
   console.log('Client app is listening on http://localhost:3000') // eslint-disable-line
 })

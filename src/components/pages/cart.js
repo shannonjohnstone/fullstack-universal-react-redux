@@ -17,9 +17,12 @@ class Cart extends Component {
       price: number
     })).isRequired
   }
-  incrementDecrementQty(e, id, type) {
+  componentDidMount() {
+    console.log(this.props, 'mount');
+  }
+  incrementDecrementQty(e, id, type, cart) {
     e.preventDefault()
-    this.props.incrementDecrementQtyAction(id, type)
+    this.props.incrementDecrementQtyAction(id, type, cart)
   }
   removeItemFromCart(e, id) {
     e.preventDefault()
@@ -39,16 +42,17 @@ class Cart extends Component {
             <p><strong>QTY:</strong> {cartArr.quantity}</p>
           </li>
           <li className="col-12-sm col-2">
+            {JSON.stringify(this.props.cart)}
             <div className="row incrementDecrement">
               <button
-                onClick={e => this.incrementDecrementQty(e, cartArr._id, 'increment')}
+                onClick={e => this.incrementDecrementQty(e, cartArr._id, 'increment', this.props.cart)}
                 className="col-6 incrementDecrement__button incrementDecrement__button--left"
-                >+
+              >+
               </button>
               <button
-                onClick={e => this.incrementDecrementQty(e, cartArr._id, 'decrement')}
+                onClick={e => this.incrementDecrementQty(e, cartArr._id, 'decrement', this.props.cart)}
                 className="col-6 incrementDecrement__button incrementDecrement__button--right"
-                >-
+              >-
               </button>
             </div>
           </li>

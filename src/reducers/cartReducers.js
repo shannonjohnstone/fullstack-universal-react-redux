@@ -19,24 +19,31 @@ export default function (state = { cart: [] }, action) {
         totalQty: totals(updatedCart).qty
       }
     }
-    case 'INCREMENT_QTY': {
-      const itemIndex = findIndexOfItemFromId(state.cart, action.payload)
-      const updatedItem = { ...state.cart[itemIndex], quantity: state.cart[itemIndex].quantity + 1 }
-      const updatedCart = [...state.cart.slice(0, itemIndex), updatedItem, ...state.cart.slice(itemIndex + 1)]
+    case 'INCREMENT_DECREMENT_QTY': {
       return {
-        cart: updatedCart,
-        totalAmount: totals(updatedCart).amount,
-        totalQty: totals(updatedCart).qty
+        cart: action.payload,
+        totalAmount: totals(action.payload).amount,
+        totalQty: totals(action.payload).qty
+      }
+    }
+    case 'INCREMENT_QTY': {
+      // const itemIndex = findIndexOfItemFromId(state.cart, action.payload)
+      // const updatedItem = { ...state.cart[itemIndex], quantity: state.cart[itemIndex].quantity + 1 }
+      // const updatedCart = [...state.cart.slice(0, itemIndex), updatedItem, ...state.cart.slice(itemIndex + 1)]
+      return {
+        cart: action.payload,
+        totalAmount: totals(action.payload).amount,
+        totalQty: totals(action.payload).qty
       }
     }
     case 'DECREMENT_QTY': {
-      const itemIndex = findIndexOfItemFromId(state.cart, action.payload)
-      const updatedItem = { ...state.cart[itemIndex], quantity: state.cart[itemIndex].quantity - 1 < 1 ? 1 : state.cart[itemIndex].quantity - 1 }
-      const updatedCart = [...state.cart.slice(0, itemIndex), updatedItem, ...state.cart.slice(itemIndex + 1)]
+      // const itemIndex = findIndexOfItemFromId(state.cart, action.payload)
+      // const updatedItem = { ...state.cart[itemIndex], quantity: state.cart[itemIndex].quantity - 1 < 1 ? 1 : state.cart[itemIndex].quantity - 1 }
+      // const updatedCart = [...state.cart.slice(0, itemIndex), updatedItem, ...state.cart.slice(itemIndex + 1)]
       return {
-        cart: updatedCart,
-        totalAmount: totals(updatedCart).amount,
-        totalQty: totals(updatedCart).qty
+        cart: action.payload,
+        totalAmount: totals(action.payload).amount,
+        totalQty: totals(action.payload).qty
       }
     }
     case 'REMOVE_ITEM': {
