@@ -17,7 +17,8 @@ class BookItem extends Component {
   }
   render() {
     const { book, book: { title, description, price } } = this.props
-    const isInCart = this.props.cart.findIndex(cartItem => cartItem.id === book.id) !== -1
+    const isInCart = this.props.cart.findIndex(cartItem => cartItem._id === book._id) !== -1
+    console.log(isInCart, 'isInCart');
     return (
       <li className="list-item">
         <div className="card">

@@ -1,23 +1,24 @@
 function findIndexOfItemFromId(array, id) {
-  return array.findIndex(item => item.id === id)
+  return array.findIndex(item => item._id === id)
 }
 
 function totals(payloadArr) {
-  const totalAmount = payloadArr.map(cartArr => cartArr.price * cartArr.quantity)
-    .reduce((a, b) => a + b, 0)
+  const totalAmount = payloadArr.map(cartArr => cartArr.price * cartArr.quantity).reduce((a, b) => a + b, 0)
+  const totalQty = payloadArr.map(item => item.quantity).reduce((a, b) => a + b, 0)
 
-  const totalQty = payloadArr.map(qty => qty.quantity).reduce((a, b) => a + b)
   return { amount: totalAmount.toFixed(2), qty: totalQty }
 }
 
 export default function (state = { cart: [] }, action) {
   switch (action.type) {
-    case 'ADD_TO_CART':
+    case 'ADD_TO_CART': {
+      const updatedCart = [...state.cart, ...action.payload]
       return {
-        cart: [...state.cart, ...action.payload],
-        totalAmount: totals(action.payload).amount,
-        totalQty: totals(action.payload).qty
+        cart: updatedCart,
+        totalAmount: totals(updatedCart).amount,
+        totalQty: totals(updatedCart).qty
       }
+    }
     case 'INCREMENT_QTY': {
       const itemIndex = findIndexOfItemFromId(state.cart, action.payload)
       const updatedItem = { ...state.cart[itemIndex], quantity: state.cart[itemIndex].quantity + 1 }

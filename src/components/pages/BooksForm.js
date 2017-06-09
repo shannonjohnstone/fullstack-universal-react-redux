@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { func } from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { postBooks, deleteBooks } from '../../actions/booksActions'
-// import { findDOMNode} from 'react'
+import { postBooksAction, deleteBooks } from '../../actions/booksActions'
+import Button from '../ui/Button'
 
 class BooksForm extends Component {
   static propTypes = {
@@ -17,9 +17,8 @@ class BooksForm extends Component {
     e.preventDefault()
     const { title, description, price } = this.refs // eslint-disable-line
     // NOTE: this id allocation is a temp fix until we add a database
-    const { id } = this.props.books[this.props.books.length - 1]
-    this.props.postBooks([{
-      id: id + 1,
+    // const { _id } = this.props.books[this.props.books.length - 1]
+    this.props.postBooksAction([{
       title: title.value,
       description: description.value,
       price: typeof price.value !== 'number' ? parseFloat(price.value) : price.value
@@ -29,14 +28,21 @@ class BooksForm extends Component {
     return (
       <div>
         <div className="card">
+          <h4>Add Book</h4>
           <form onSubmit={this.handleSubmit}>
-            <label htmlFor="title">Title</label>
-            <input type="text" name="title" placeholder="Enter title" ref="title" className="form-input" />
-            <label htmlFor="description">Description</label>
-            <input type="text" name="description" placeholder="Enter description" ref="description" className="form-input" />
-            <label htmlFor="price">Price</label>
-            <input type="text" name="price" placeholder="Enter price" ref="price" className="form-input" />
-            <input type="submit" value="Submit" />
+            <div className="form-group">
+              <label htmlFor="title">Title</label>
+              <input type="text" name="title" placeholder="Enter title" ref="title" className="form-input" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="description">Description</label>
+              <input type="text" name="description" placeholder="Enter description" ref="description" className="form-input" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="price">Price</label>
+              <input type="text" name="price" placeholder="Enter price" ref="price" className="form-input" />
+            </div>
+            <input type="submit" className="btn btn--primary" value="Submit" />
           </form>
         </div>
       </div>
@@ -45,7 +51,7 @@ class BooksForm extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ postBooks, deleteBooks }, dispatch)
+  return bindActionCreators({ postBooksAction, deleteBooks }, dispatch)
 }
 
 function mapStateToProps(state) {

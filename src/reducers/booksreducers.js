@@ -4,34 +4,60 @@ function findIndexOfItemFromId(array, id) {
 }
 
 const initState = {
-  books: [{
-    id: 1,
-    title: 'Book Title',
-    description: 'Best book ever.',
-    price: 20.00
-  },
-  {
-    id: 2,
-    title: 'Book Title 2',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, suscipit, necessitatibus. Blanditiis atque iste tenetur rem voluptatum quia pariatur rerum, dolorum, deleniti ab, reiciendis sit veniam eaque optio earum odit..',
-    price: 88.99
-  },
-  {
-    id: 3,
-    title: 'Book Title 2 has a really really really looooooong name......',
-    description: 'Best book ever.',
-    price: 88.99
-  }]
+  books: [],
+  isSet: false,
+  isFetching: false,
+  error: null
 }
 
 export default function (state = initState, action) {
   const { type, payload } = action
   switch (type) {
     case 'FETCH_BOOKS': {
-      return { ...state, books: [...state.books] }
+      return {
+        ...state,
+        isSet: action.isSet,
+        isFetching: action.isFetching
+      }
+    }
+    case 'FETCH_BOOKS_SUCCESS': {
+      return {
+        ...state,
+        isSet: action.isSet,
+        isFetching: action.isFetching,
+        books: [...state.books, ...action.books]
+      }
+    }
+    case 'FETCH_BOOKS_FAILED': {
+      return {
+        ...state,
+        isSet: action.isSet,
+        isFetching: action.isFetching,
+        error: action.error
+      }
     }
     case 'POST_BOOK': {
-      return { books: [...state.books, ...payload] }
+      return {
+        ...state,
+        isSet: action.isSet,
+        isFetching: action.isFetching
+      }
+    }
+    case 'POST_BOOK_SUCCESS': {
+      return {
+        ...state,
+        // books: [...state.books, ...payload],
+        isSet: action.isSet,
+        isFetching: action.isFetching
+      }
+    }
+    case 'POST_BOOK_FAILED': {
+      return {
+        ...state,
+        isSet: action.isSet,
+        isFetching: action.isFetching,
+        error: action.error
+      }
     }
     case 'DELETE_BOOK': {
       const bookIndexToDelete = findIndexOfItemFromId(state.books, payload.id)

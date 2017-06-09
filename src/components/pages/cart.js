@@ -28,7 +28,8 @@ class Cart extends Component {
   renderCart() {
     const cartItemList = this.props.cart.map(cartArr => (
       <div className="row">
-        <ul className="list--clean col-12" key={cartArr.id}>
+        {JSON.stringify(cartArr)}
+        <ul className="list--clean col-12" key={cartArr._id}>
           <li className="col-12-sm col-4">
             <p className="truncate"><strong>{cartArr.title}</strong></p>
           </li>
@@ -41,12 +42,12 @@ class Cart extends Component {
           <li className="col-12-sm col-2">
             <div className="row incrementDecrement">
               <button
-                onClick={e => this.incrementDecrementQty(e, cartArr.id, 'increment')}
+                onClick={e => this.incrementDecrementQty(e, cartArr._id, 'increment')}
                 className="col-6 incrementDecrement__button incrementDecrement__button--left"
                 >+
               </button>
               <button
-                onClick={e => this.incrementDecrementQty(e, cartArr.id, 'decrement')}
+                onClick={e => this.incrementDecrementQty(e, cartArr._id, 'decrement')}
                 className="col-6 incrementDecrement__button incrementDecrement__button--right"
                 >-
               </button>
@@ -56,7 +57,7 @@ class Cart extends Component {
             <Button
               buttonType="danger"
               value="Delete"
-              onClick={e => this.removeItemFromCart(e, cartArr.id)}
+              onClick={e => this.removeItemFromCart(e, cartArr._id)}
             />
           </li>
         </ul>
@@ -71,7 +72,7 @@ class Cart extends Component {
         <Button
           buttonType="success"
           value="Checkout"
-          // onClick={e => this.removeItemFromCart(e, cartArr.id)}
+          // onClick={e => this.removeItemFromCart(e, cartArr._id)}
         />
       </div>
     )

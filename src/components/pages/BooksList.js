@@ -27,10 +27,7 @@ class BooksList extends Component {
       <div className="row">
         <h1>Books List</h1>
         <div className="row">
-          <div className="col-6">
-            <BooksForm />
-          </div>
-          <div className="col-6">
+          <div className="col-12">
             <ul className="list--clean">
               {books}
             </ul>

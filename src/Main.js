@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import Navigation from './components/Navigation'
 import BooksList from './components/pages/BooksList'
 import Cart from './components/pages/Cart'
+import Admin from './components/pages/Admin'
 
 const customHistory = createBrowerHistory()
 
@@ -22,8 +23,8 @@ class Main extends PureComponent {
           <div className="container">
             <Route exact path="/" component={BooksList} />
             {/* <Route exact path="/about" component={About} />
-            <Route exact path="/contact" component={Contact} />
-            <Route exact path="/admin" component={Admin} /> */}
+            <Route exact path="/contact" component={Contact} /> */}
+            <Route exact path="/admin" component={Admin} />
             <Route exact path="/cart" component={Cart} />
           </div>
         </div>

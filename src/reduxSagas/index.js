@@ -3,6 +3,7 @@ import watchers from './watchers'
 
 export default function* rootSaga() {
   yield all([
-    watchers.fetchBooksWatcher()
+    watchers.fetchBooksWatcher(),
+    watchers.postBooksWatcher()
   ])
 }
