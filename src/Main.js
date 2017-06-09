@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import { bindActionCreators } from 'redux'
 import { number } from 'prop-types'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import createBrowerHistory from 'history/createBrowserHistory'
@@ -7,12 +8,16 @@ import Navigation from './components/Navigation'
 import BooksList from './components/pages/BooksList'
 import Cart from './components/pages/Cart'
 import Admin from './components/pages/Admin'
+import { fetchCartAction } from './actions/cartActions'
 
 const customHistory = createBrowerHistory()
 
 class Main extends PureComponent {
   static propTypes = {
     totalQty: number.isRequired
+  }
+  componentDidMount() {
+    this.props.fetchCartAction()
   }
   render() {
     const { totalQty } = this.props
@@ -39,4 +44,8 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Main)
+function mapDispatchToProp(dispatch) {
+  return bindActionCreators({ fetchCartAction }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProp)(Main)

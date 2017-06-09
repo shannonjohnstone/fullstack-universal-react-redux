@@ -11,7 +11,39 @@ function totals(payloadArr) {
 
 export default function (state = { cart: [] }, action) {
   switch (action.type) {
+    case 'FETCH_CART': {
+      return {
+        ...state,
+        isSet: false,
+        isFetching: true
+      }
+    }
+    case 'FETCH_CART_SUCCESS': {
+      return {
+        ...state,
+        isSet: true,
+        isFetching: false,
+        cart: action.payload,
+        totalAmount: totals(action.payload).amount,
+        totalQty: totals(action.payload).qty
+      }
+    }
+    case 'FETCH_CART_FAILED': {
+      return {
+        ...state,
+        isSet: false,
+        isFetching: false,
+        error: 'There has been a technical error.'
+      }
+    }
     case 'ADD_TO_CART': {
+      return {
+        ...state,
+        isSet: false,
+        isPosting: true
+      }
+    }
+    case 'ADD_TO_CART_SUCCESS': {
       const updatedCart = [...state.cart, ...action.payload]
       return {
         cart: updatedCart,
@@ -26,20 +58,7 @@ export default function (state = { cart: [] }, action) {
         totalQty: totals(action.payload).qty
       }
     }
-    case 'INCREMENT_QTY': {
-      // const itemIndex = findIndexOfItemFromId(state.cart, action.payload)
-      // const updatedItem = { ...state.cart[itemIndex], quantity: state.cart[itemIndex].quantity + 1 }
-      // const updatedCart = [...state.cart.slice(0, itemIndex), updatedItem, ...state.cart.slice(itemIndex + 1)]
-      return {
-        cart: action.payload,
-        totalAmount: totals(action.payload).amount,
-        totalQty: totals(action.payload).qty
-      }
-    }
-    case 'DECREMENT_QTY': {
-      // const itemIndex = findIndexOfItemFromId(state.cart, action.payload)
-      // const updatedItem = { ...state.cart[itemIndex], quantity: state.cart[itemIndex].quantity - 1 < 1 ? 1 : state.cart[itemIndex].quantity - 1 }
-      // const updatedCart = [...state.cart.slice(0, itemIndex), updatedItem, ...state.cart.slice(itemIndex + 1)]
+    case 'INCREMENT_DECREMENT_QTY_SUCCESS': {
       return {
         cart: action.payload,
         totalAmount: totals(action.payload).amount,

@@ -15,7 +15,7 @@ class BooksList extends Component {
   render() {
     // spreading array into a new array so the reverse does not effect the orginal books array
     // reverse() will mutate the orginal/reference array and does not create a new version
-    const books = [...this.props.books].reverse().map(book => <BookItem key={book.id} book={book} />)
+    const books = [...this.props.books].reverse().map(book => <BookItem key={book._id} book={book} />)
     return (
       <div className="row">
         <h1>Books List</h1>

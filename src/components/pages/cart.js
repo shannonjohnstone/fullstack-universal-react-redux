@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { shape, arrayOf, string, number, func } from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { incrementDecrementQtyAction, removeItemFromCartAction } from '../../actions/cartActions'
+import { fetchCartAction, incrementDecrementQtyAction, removeItemFromCartAction } from '../../actions/cartActions'
 import Button from '../ui/Button'
 
 class Cart extends Component {
@@ -18,7 +18,7 @@ class Cart extends Component {
     })).isRequired
   }
   componentDidMount() {
-    console.log(this.props, 'mount');
+    this.props.fetchCartAction()
   }
   incrementDecrementQty(e, id, type, cart) {
     e.preventDefault()
@@ -30,7 +30,7 @@ class Cart extends Component {
   }
   renderCart() {
     const cartItemList = this.props.cart.map(cartArr => (
-      <div className="row">
+      <div className="row" key={cartArr._id}>
         <ul className="list--clean col-12" key={cartArr._id}>
           <li className="col-12-sm col-4">
             <p className="truncate"><strong>{cartArr.title}</strong></p>
@@ -42,7 +42,6 @@ class Cart extends Component {
             <p><strong>QTY:</strong> {cartArr.quantity}</p>
           </li>
           <li className="col-12-sm col-2">
-            {JSON.stringify(this.props.cart)}
             <div className="row incrementDecrement">
               <button
                 onClick={e => this.incrementDecrementQty(e, cartArr._id, 'increment', this.props.cart)}
@@ -96,6 +95,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
+    fetchCartAction,
     incrementDecrementQtyAction,
     removeItemFromCartAction
   }, dispatch)

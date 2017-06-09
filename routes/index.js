@@ -1,9 +1,9 @@
-var express = require('express')
-var router = express.Router()
+/* eslint prefer-arrow-callback: 0 */
+/* eslint func-names: 0 */
+const books = require('./books')
+const cart = require('./cart')
 
-/* GET home page. */
-router.get('/books', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
-module.exports = router;
+module.exports = function (appServer) {
+  appServer.use(books)
+  appServer.use(cart)
+}

@@ -4,6 +4,9 @@ import watchers from './watchers'
 export default function* rootSaga() {
   yield all([
     watchers.fetchBooksWatcher(),
-    watchers.postBooksWatcher()
+    watchers.postBooksWatcher(),
+    watchers.postToCartWatcher(),
+    watchers.fetchCartWatcher(),
+    watchers.incrementDecrementQtyWatcher()
   ])
 }

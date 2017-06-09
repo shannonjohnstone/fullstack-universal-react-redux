@@ -6,7 +6,7 @@ const express = require('express')
 // const logger = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 // const errorHandlers = require('./handlers/errorHandlers')
@@ -27,6 +27,7 @@ appServer.use(session({
   // ttl: 2 days * 24 hours * 60 minutes * 60 seconds
 }))
 
-appServer.use(require('./routes/books'))
+// appServer.use(require('./routes/books'))
+require('./routes')(appServer)
 
 module.exports = appServer

@@ -7,6 +7,19 @@ const path = require('path')
 const favicon = require('serve-favicon')
 const errorHandlers = require('./handlers/errorHandlers')
 const httpProxy = require('http-proxy')
+const env = require('node-env-file')
+
+switch (process.env.NODE_ENV = 'development') {
+  case 'development': {
+    console.log('DEVELOPMENT MODE - CLIENT') // eslint-disable-line
+    env(path.resolve(__dirname, '.env.dev'))
+    break
+  }
+  default: {
+    env(path.resolve(__dirname, '.env'))
+    console.log('PRODUCTION MODE - CLIENT') // eslint-disable-line
+  }
+}
 
 const app = express()
 app.use(logger('dev'))
