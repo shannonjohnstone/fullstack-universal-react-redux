@@ -1,15 +1,13 @@
 import { put } from 'redux-saga/effects'
-import apiCaller from '../../services/api'
+import postBooksApi from '../../services/api/postBooksApi'
 import { postBooksSuccessAction, postBooksFailedAction } from '../../actions/booksActions'
 
 export default function* postBooksSaga(action) {
   console.log(process.env, 'postBooksSaga...') // eslint-disable-line
   try {
-    const { data } = yield apiCaller('post', `${process.env.API_URL}api/services/v1/books`, action.books)
-    console.log(data, 'try...')
+    const { data } = yield postBooksApi(action.books)
     yield put(postBooksSuccessAction())
   } catch (e) {
-    console.log('catch...')
     yield put(postBooksFailedAction())
   }
 }
