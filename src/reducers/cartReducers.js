@@ -9,7 +9,7 @@ function totals(payloadArr) {
   return { amount: totalAmount.toFixed(2), qty: totalQty }
 }
 
-export default function (state = { cart: [] }, action) {
+export default function (state = { cart: [], totalQty: 0, totalAmount: 0 }, action) {
   switch (action.type) {
     case 'FETCH_CART': {
       return {
@@ -44,7 +44,7 @@ export default function (state = { cart: [] }, action) {
       }
     }
     case 'ADD_TO_CART_SUCCESS': {
-      const updatedCart = [...state.cart, ...action.payload]
+      const updatedCart = action.payload
       return {
         cart: updatedCart,
         totalAmount: totals(updatedCart).amount,

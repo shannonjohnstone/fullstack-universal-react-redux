@@ -7,12 +7,12 @@ function calculateQty(cart, type, itemIndex) {
   return cart[itemIndex].quantity - 1 < 1 ? 1 : cart[itemIndex].quantity - 1
 }
 
-export function addToCartAction(book) {
+export function addToCartAction(updatedCart) {
   return {
     type: 'ADD_TO_CART',
     isSet: false,
     isFetching: true,
-    payload: book
+    payload: updatedCart
   }
 }
 

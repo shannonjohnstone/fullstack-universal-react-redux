@@ -5,7 +5,7 @@ import { addToCartSuccessAction } from '../../actions/cartActions'
 export default function* postToCartSaga(action) {
   try {
     const { data } = yield postToCartApi(action.payload)
-    console.log('postToCartSaga') // eslint-disable-line
+    console.log(data, 'postToCartSaga') // eslint-disable-line
     yield put(addToCartSuccessAction(data))
   } catch (e) {
     // yield put(fetchBooksFailedAction())

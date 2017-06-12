@@ -12,12 +12,12 @@ class BookItem extends Component {
   }
   addItemToCart(e, book, isInCart) {
     e.preventDefault()
-    const { addToCartAction: _addToCartAction } = this.props
-    if (!isInCart) _addToCartAction([{ ...book, quantity: 1 }])
+    const { addToCartAction: _addToCartAction, cart } = this.props
+    const updatedCart = [...cart, { ...book, quantity: 1 }] // creating an updated cart here to make it easier for updating the cart session
+    if (!isInCart) _addToCartAction(updatedCart)
   }
   render() {
     const { book, book: { title, description, price } } = this.props
-    console.log(this.props.cart, 'this.props.cart')
     const isInCart = this.props.cart.findIndex(cartItem => cartItem._id === book._id) !== -1
     return (
       <li className="list-item">

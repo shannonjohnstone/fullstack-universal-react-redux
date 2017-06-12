@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-import { NavLink } from 'react-router-dom'
+import { number } from 'prop-types'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 import Badge from './Badge'
 
@@ -30,19 +33,23 @@ const navConfig = [
   ]
 ]
 
-class Navigation extends Component {
+const checkIfCartMenuItem = (item, totalQty) => (
+    (item.url === '/cart' && totalQty > 0) && <Badge className="badge" totalQty={totalQty} />)
+
+function renderNav(_navConfig, index, totalQty) {
+  return _navConfig[index].map(item => (
+    <li key={item.url} className="list-item navigation__list-item"><Link to={item.url}>{item.page}{checkIfCartMenuItem(item, totalQty)}</Link></li>))
+}
+
+class NavigationNew extends Component {
+  static propTypes = {
+    totalQty: number.isRequired
+  }
   render() {
-    const checkIfCartMenuItem = item => (
-      (item.url === '/cart') && <Badge className="badge" totalQty={0} />)
-
-      // (item.url === '/cart' && this.props.totalQty > 0) && <Badge className="badge" totalQty={this.props.totalQty} />)
-
-    const navItemsLeft = navConfig[0].map(item => (
-      <li key={item.url} className="list-item navigation__list-item"><NavLink to={item.url}>{item.page}</NavLink></li>))
-
-    const navItemsRight = navConfig[1].map(item => (
-      <li key={item.url} className="list-item navigation__list-item"><NavLink to={item.url}>{item.page}</NavLink>{checkIfCartMenuItem(item)}</li>))
-
+    function destroySession() {
+      axios({ method: 'post', url: 'api/services/v1/cart/endSession'})
+    }
+    const { totalQty } = this.props
     return (
       <nav className="row navigation">
         <div className="container">
@@ -53,12 +60,13 @@ class Navigation extends Component {
           <ul className="list--clean navigation__list">
             <li className="list-item navigation__list-item navigation__list-item--left">
               <ul className="list--clean navigation__list">
-                {navItemsLeft}
+                {renderNav(navConfig, 0)}
               </ul>
             </li>
             <li className="list-item navigation__list-item navigation__list--right">
               <ul className="list--clean navigation__list">
-                {navItemsRight}
+                {renderNav(navConfig, 1, totalQty)}
+                <li><button onClick={destroySession}>🔥</button></li>
               </ul>
             </li>
           </ul>
@@ -67,4 +75,11 @@ class Navigation extends Component {
     )
   }
 }
-export default Navigation
+
+function mapStateToProps(state) {
+  return {
+    totalQty: state.cart.totalQty
+  }
+}
+
+export default connect(mapStateToProps)(NavigationNew)

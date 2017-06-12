@@ -1,5 +1,8 @@
 /* eslint prefer-arrow-callback: 0 */
 /* eslint func-names: 0 */
+require('babel-core/register')({
+  presets: ['react', 'es2015', 'es2016', 'es2017', 'stage-1', 'stage-0']
+})
 
 const express = require('express')
 const logger = require('morgan')
@@ -8,6 +11,8 @@ const favicon = require('serve-favicon')
 const errorHandlers = require('./handlers/errorHandlers')
 const httpProxy = require('http-proxy')
 const env = require('node-env-file')
+
+const requestHandler = require('./requestHandler')
 
 switch (process.env.NODE_ENV = 'development') {
   case 'development': {
@@ -36,9 +41,15 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.get('*', function (req, res) {
-  res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
-})
+app.set('view engine', 'pug')
+app.use(requestHandler)
+// app.get('*', (req, res) => {
+//   requestHandler(req, res)
+// })
+
+// app.get('*', function (req, res) {
+//   res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+// })
 
 // If that above routes didnt work, we 404 them and forward to error handler
 app.use(errorHandlers.notFound)
