@@ -7236,6 +7236,10 @@ var _Admin = __webpack_require__(39);
 
 var _Admin2 = _interopRequireDefault(_Admin);
 
+var _SignupSignIn = __webpack_require__(153);
+
+var _SignupSignIn2 = _interopRequireDefault(_SignupSignIn);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Routes = function Routes() {
@@ -7244,14 +7248,72 @@ var Routes = function Routes() {
     null,
     _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _BooksList2.default }),
     _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/admin', component: _Admin2.default }),
-    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/cart', component: _Cart2.default })
+    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/cart', component: _Cart2.default }),
+    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/signin', component: _SignupSignIn2.default })
   );
 };
 
 exports.default = Routes;
 
 /***/ }),
-/* 84 */,
+/* 84 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _axios = __webpack_require__(61);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var apiCaller = function () {
+  var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+    var method = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'get';
+    var url = arguments[1];
+    var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    var results;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            _context.next = 3;
+            return (0, _axios2.default)({ method: method, url: url, data: data });
+
+          case 3:
+            results = _context.sent;
+            return _context.abrupt('return', results);
+
+          case 7:
+            _context.prev = 7;
+            _context.t0 = _context['catch'](0);
+
+            console.log(_context.t0, 'apiCaller error' // eslint-disable-line
+            );
+          case 10:
+          case 'end':
+            return _context.stop();
+        }
+      }
+    }, _callee, undefined, [[0, 7]]);
+  }));
+
+  return function apiCaller() {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+exports.default = apiCaller;
+
+/***/ }),
 /* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12679,6 +12741,166 @@ module.exports = function(module) {
 
 module.exports = __webpack_require__(60);
 
+
+/***/ }),
+/* 153 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(2);
+
+var _reactRedux = __webpack_require__(10);
+
+var _redux = __webpack_require__(11);
+
+var _Button = __webpack_require__(20);
+
+var _Button2 = _interopRequireDefault(_Button);
+
+var _signupApi = __webpack_require__(154);
+
+var _signupApi2 = _interopRequireDefault(_signupApi);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SignupSignIn = function (_Component) {
+  _inherits(SignupSignIn, _Component);
+
+  function SignupSignIn(props) {
+    _classCallCheck(this, SignupSignIn);
+
+    var _this = _possibleConstructorReturn(this, (SignupSignIn.__proto__ || Object.getPrototypeOf(SignupSignIn)).call(this, props));
+
+    _this.state = {
+      signin: true
+    };
+
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.signupForm = _this.signupForm.bind(_this);
+    _this.siginOrSignup = _this.siginOrSignup.bind(_this);
+    return _this;
+  }
+
+  _createClass(SignupSignIn, [{
+    key: 'handleSubmit',
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      var _refs = this.refs,
+          email = _refs.email,
+          password = _refs.password; // eslint-disable-line
+
+      (0, _signupApi2.default)({ email: email, password: password });
+    }
+  }, {
+    key: 'signupForm',
+    value: function signupForm(e) {
+      e.preventDefault();
+      this.setState({
+        signin: !this.state.signin
+      });
+    }
+  }, {
+    key: 'siginOrSignup',
+    value: function siginOrSignup(signin) {
+      return _react2.default.createElement(
+        'a',
+        { href: '', onClick: this.signupForm },
+        signin ? 'Need an account, sign up here' : 'Already have an account, login here'
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'div',
+          { className: 'card' },
+          _react2.default.createElement(
+            'h4',
+            null,
+            this.state.signin ? 'Sign In' : 'Sign Up'
+          ),
+          _react2.default.createElement(
+            'form',
+            { onSubmit: this.handleSubmit },
+            _react2.default.createElement(
+              'div',
+              { className: 'form-group' },
+              _react2.default.createElement(
+                'label',
+                { htmlFor: 'email' },
+                'Email'
+              ),
+              _react2.default.createElement('input', { type: 'text', name: 'email', placeholder: 'Enter email', ref: 'email', className: 'form-input' })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'form-group' },
+              _react2.default.createElement(
+                'label',
+                { htmlFor: 'password' },
+                'Password'
+              ),
+              _react2.default.createElement('input', { type: 'text', name: 'password', placeholder: 'Enter password', ref: 'description', className: 'form-input' })
+            ),
+            _react2.default.createElement('input', { type: 'submit', className: 'btn btn--primary', value: 'Submit' }),
+            ' ',
+            this.siginOrSignup(this.state.signin)
+          )
+        )
+      );
+    }
+  }]);
+
+  return SignupSignIn;
+}(_react.Component);
+
+SignupSignIn.propTypes = {
+  postBooks: _propTypes.func.isRequired
+};
+exports.default = (0, _reactRedux.connect)()(SignupSignIn);
+
+/***/ }),
+/* 154 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = signupApi;
+
+var _index = __webpack_require__(84);
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function signupApi(userDetails) {
+  return (0, _index2.default)('post', 'api/services/v1/auth/signup', { userDetails: userDetails });
+}
 
 /***/ })
 /******/ ]);

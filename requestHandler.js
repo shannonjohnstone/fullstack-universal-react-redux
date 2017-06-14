@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import axios from 'axios'
 import path from 'path'
 import { createStore } from 'redux'

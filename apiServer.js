@@ -9,6 +9,10 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
+const expressValidator = require('express-validator')
+
+const customExpressValidator = require('./validators/customExpressValidator');
+
 // const errorHandlers = require('./handlers/errorHandlers')
 
 const appServer = express()
@@ -16,6 +20,7 @@ const appServer = express()
 // appServer.use(logger('dev'))
 appServer.use(bodyParser.json())
 appServer.use(bodyParser.urlencoded({ extended: false }))
+appServer.use(expressValidator(customExpressValidator()))
 appServer.use(cookieParser())
 
 appServer.use(session({

@@ -60,46 +60,46 @@ module.exports = [
       hot: true
     }
   },
-  {
-    name: 'client for SSR',
-    entry: ['./src/App.js'],
-    output: {
-      filename: 'App.js',
-      path: path.resolve(__dirname, 'public'),
-    },
-    watch: true,
-    module: {
-      rules: [
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          loader: 'babel-loader',
-          query: {
-            presets: ['react', 'es2015', 'es2016', 'es2017', 'stage-1', 'stage-0']
-          }
-        }
-      ]
-    }
-  },
-  {
-    name: 'client reducers',
-    entry: ['./src/reducers/index.js'],
-    output: {
-      filename: 'reducers.js',
-      path: path.resolve(__dirname, 'public'),
-    },
-    watch: true,
-    module: {
-      rules: [
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          loader: 'babel-loader',
-          query: {
-            presets: ['react', 'es2015', 'es2016', 'es2017', 'stage-1', 'stage-0']
-          }
-        }
-      ]
-    }
-  }
+  // {
+  //   name: 'client for SSR',
+  //   entry: ['./src/App.js'],
+  //   output: {
+  //     filename: 'App.js',
+  //     path: path.resolve(__dirname, 'public'),
+  //   },
+  //   watch: true,
+  //   module: {
+  //     rules: [
+  //       {
+  //         test: /\.js$/,
+  //         exclude: /node_modules/,
+  //         loader: 'babel-loader',
+  //         query: {
+  //           presets: ['react', 'es2015', 'es2016', 'es2017', 'stage-1', 'stage-0']
+  //         }
+  //       }
+  //     ]
+  //   }
+  // },
+  // {
+  //   name: 'client reducers',
+  //   entry: ['./src/reducers/index.js'],
+  //   output: {
+  //     filename: 'reducers.js',
+  //     path: path.resolve(__dirname, 'public'),
+  //   },
+  //   watch: true,
+  //   module: {
+  //     rules: [
+  //       {
+  //         test: /\.js$/,
+  //         exclude: /node_modules/,
+  //         loader: 'babel-loader',
+  //         query: {
+  //           presets: ['react', 'es2015', 'es2016', 'es2017', 'stage-1', 'stage-0']
+  //         }
+  //       }
+  //     ]
+  //   }
+  // }
 ]

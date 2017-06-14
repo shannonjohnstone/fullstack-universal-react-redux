@@ -32,6 +32,7 @@ mongoose.connection.on('error', (err) => {
 mongoose.connection.on('open', () => { console.log('Connection to mongoose success') })
 
 require('./models/books')
+require('./models/user')
 
 const app = require('./apiServer')
 
