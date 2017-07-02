@@ -7,6 +7,7 @@ export default function* rootSaga() {
     watchers.postBooksWatcher(),
     watchers.postToCartWatcher(),
     watchers.fetchCartWatcher(),
-    watchers.incrementDecrementQtyWatcher()
+    watchers.incrementDecrementQtyWatcher(),
+    watchers.signinSignoutWatcher()
   ])
 }

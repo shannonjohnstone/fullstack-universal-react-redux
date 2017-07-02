@@ -33,7 +33,7 @@ const jwtLogin = new JwtStrategy(jwtOptions, function (payload, done) {
     if (err) return done(err, false)
 
     if (user) return done(null, user) // found user
-    return done(null, false) // did not find user
+    return done('null', false) // did not find user
   })
 })
 

@@ -43,7 +43,8 @@ function handleRender(req, res) {
   const appHtml = renderToString(
     h(Provider, { store },
       h(StaticRouter, { location: req.url, context },
-        h(App))
+        h(App)
+      )
   ))
 
   if (context.url) {
@@ -54,6 +55,7 @@ function handleRender(req, res) {
     // const preloadedState = `window.__PRELOADED__STATE=${serialize(store.getState())}`
     // console.log(JSON.stringify(store.getState()), 'SSR Store')
     const state = JSON.stringify(store.getState()).trim()
+    console.log(state, 'state...');
     const preloadedState = `window.__PRELOADED__STATE=${state}`
     // res.status(200).render('index', { appHtml, preloadedState, title: 'Universal 2' })
     res.status(200).render('index', { appHtml, preloadedState, title: 'Universal 2' })

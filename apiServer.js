@@ -11,7 +11,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const expressValidator = require('express-validator')
 
-const customExpressValidator = require('./validators/customExpressValidator');
+const customExpressValidator = require('./validators/customExpressValidator')
 
 // const errorHandlers = require('./handlers/errorHandlers')
 
@@ -28,15 +28,14 @@ appServer.use(session({
   key: process.env.KEY,
   saveUninitialized: false,
   resave: false,
-  store: new MongoStore({ mongooseConnection: mongoose.connection })
-  // store: new MongoStore({ mongooseConnection: mongoose.connection, ttl: 2 * 24 * 60 * 60 })
+  store: new MongoStore({ mongooseConnection: mongoose.connection, ttl: 2 * 24 * 60 * 60 })
   // ttl: 2 days * 24 hours * 60 minutes * 60 seconds
 }))
 
-appServer.get('/test', (req, res) => {
-  res.json({ test: 'test' })
-})
-// appServer.use(require('./routes/books'))
+// appServer.get('/test', (req, res) => {
+//   res.json({ test: 'test' })
+// })
+// // appServer.use(require('./routes/books'))
 require('./routes')(appServer)
 
 module.exports = appServer

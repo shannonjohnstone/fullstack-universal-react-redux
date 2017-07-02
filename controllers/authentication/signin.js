@@ -5,7 +5,6 @@ const { tokenForUser } = require('./authToken')
 
 module.exports = async (req, res, next) => {
   const email = req.body.email
-  const password = req.body.password
   // if (!email || !password) return res.status(422).send('Please provide both email and password')
 
   try {

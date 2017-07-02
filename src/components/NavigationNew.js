@@ -29,6 +29,10 @@ const navConfig = [
     {
       page: 'Your cart',
       url: '/cart'
+    },
+    {
+      page: 'Sign In',
+      url: '/signin'
     }
   ]
 ]
@@ -36,9 +40,15 @@ const navConfig = [
 const checkIfCartMenuItem = (item, totalQty) => (
     (item.url === '/cart' && totalQty > 0) && <Badge className="badge" totalQty={totalQty} />)
 
+const signinOrSignOut = (item, totalQty, isLoggedIn = false) => (
+  (item.url === '/signin' && isLoggedIn) ?
+    <a href="/signout">Sign out</a> :
+    <Link to={item.url}>{item.page}{checkIfCartMenuItem(item, totalQty)}</Link>
+)
+
 function renderNav(_navConfig, index, totalQty) {
   return _navConfig[index].map(item => (
-    <li key={item.url} className="list-item navigation__list-item"><Link to={item.url}>{item.page}{checkIfCartMenuItem(item, totalQty)}</Link></li>))
+    <li key={item.url} className="list-item navigation__list-item">{signinOrSignOut(item, totalQty)}</li>))
 }
 
 class NavigationNew extends Component {
@@ -66,11 +76,13 @@ class NavigationNew extends Component {
             <li className="list-item navigation__list-item navigation__list--right">
               <ul className="list--clean navigation__list">
                 {renderNav(navConfig, 1, totalQty)}
-                <li><button onClick={destroySession}>🔥</button></li>
               </ul>
             </li>
           </ul>
         </div>
+        <ul className="list--clean navigation__list">
+          <li><button onClick={destroySession}>🔥</button></li>
+        </ul>
       </nav>
     )
   }
