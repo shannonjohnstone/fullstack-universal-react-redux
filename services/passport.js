@@ -14,6 +14,7 @@ const LocalStrategy = require('passport-local')
 // localLogin is for when an existing user is logging in via login page
 const localOptions = { usernameField: 'email' }
 const localLogin = new LocalStrategy(localOptions, function (email, password, done) {
+  console.log('localLogin....');
   User.findOne({ email }, function (err, user) {
     if (err) return done(err, false)
     if (!user) return done(null, false) // did not find user

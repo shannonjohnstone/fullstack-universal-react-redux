@@ -1,5 +1,6 @@
 const express = require('express')
 const passport = require('passport')
+require('../services/passport')
 
 // const passportServices = require('../services/passport')
 const requireAuth = passport.authenticate('jwt', { session: false })
@@ -14,6 +15,9 @@ router.get('/', requireAuth, (req, res) => {
   res.send('Hi there!')
 })
 
+// router.get('/', requireSignin, function (req, res) {
+//   res.send('Hi There...')
+// })
 router.post('/signin', requireSignin, authentication.signin)
 router.post('/signup', authentication.validateUserRegister, authentication.signup)
 

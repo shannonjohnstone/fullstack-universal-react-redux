@@ -1,8 +1,9 @@
 /* global document */
 import 'babel-polyfill'
 import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
-import createBrowerHistory from 'history/createBrowserHistory'
+import { BrowserRouter, Router } from 'react-router-dom'
+// import createBrowerHistory from 'history/createBrowserHistory'
+import history from './history'
 import { render } from 'react-dom'
 import { applyMiddleware, createStore } from 'redux'
 import { Provider } from 'react-redux'
@@ -16,7 +17,7 @@ import NavigationNew from './components/NavigationNew'
 
 require('./styles/main.scss') // include css
 
-const customHistory = createBrowerHistory()
+// export const customHistory = createBrowerHistory()
 
 const sagaMiddleware = createSagaMiddleware()
 const middleware = applyMiddleware(logger, sagaMiddleware)
@@ -27,11 +28,11 @@ sagaMiddleware.run(rootSaga)
 
 render(
   <Provider store={store}>
-    <BrowserRouter history={customHistory}>
+    <Router history={history}>
       <div>
         <NavigationNew />
         <App />
       </div>
-    </BrowserRouter>
+    </Router>
   </Provider>, document.getElementById('app')
 )
